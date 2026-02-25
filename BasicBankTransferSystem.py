@@ -29,12 +29,22 @@ def OptionChoose():
     if (ChoosenOption == '3'):
         print("====================================================================================================/n")
         OptionDeleteAccount()
+    if (ChoosenOption == '100'):
+        print("====================================================================================================/n")
+        AddAnAccount()
+        OptionChoose()
     if (ChoosenOption == 'exit'):
+        conn.close()
         return
     else:
         print("====================================================================================================/n")
         print("Oops! No option for ", ChoosenOption)
-        OptionChoose()
+       
+#function for adding one account to test
+def AddAnAccount():
+    cursor.execute("INSERT INTO Bank_Details values ('Pranay',20,'pranay.ali118@gmail.com','8758915505','Pinai.144','1500','123456')")
+    conn.commit()
+    OptionChoose()
 
 #function for generating random number for account number      
 def RandomAccountNumberGenerator():
@@ -51,12 +61,13 @@ def OptionViewDetails():
     AccountNumber = input("Please Enter Your Account Number: ")
     cursor.execute("SELECT * FROM Bank_Details WHERE AccountNumber = %s", (AccountNumber,))    
     row = cursor.fetchone()
+    print("====================================================================================================/n")
     print("Name: ", row[0])
     print("Age: ", row[1])
-    print("Age: ", row[1])
-    print("Age: ", row[1])
-    print("Age: ", row[1])
-    print("Age: ", row[1])
+    print("Email: ", row[2])
+    print("Number: ", row[3])
+    print("Balance: ", row[5])
+    print("Account Number: ", row[6])
 
 #function to add new account and details
 def OptionAddAccount():
