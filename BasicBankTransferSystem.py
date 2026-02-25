@@ -1,6 +1,7 @@
 import mysql.connector
 import random
 
+#Name, Age, Email, Number, Passowrd, Balance, AccountNumber
 print("====================================================================================================/n")
 
 conn = mysql.connector.connect(
@@ -23,7 +24,11 @@ def OptionChoose():
         print("====================================================================================================/n")
         OptionViewDetails()
     if (ChoosenOption == '2'):
-        OptionAddDetails()
+        print("====================================================================================================/n")
+        OptionAddAccount()
+    if (ChoosenOption == '3'):
+        print("====================================================================================================/n")
+        OptionDeleteAccount()
     if (ChoosenOption == 'exit'):
         return
     else:
@@ -45,12 +50,16 @@ def RandomAccountNumberGenerator():
 def OptionViewDetails():
     AccountNumber = input("Please Enter Your Account Number: ")
     cursor.execute("SELECT * FROM Bank_Details WHERE AccountNumber = %s", (AccountNumber,))    
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
+    row = cursor.fetchone()
+    print("Name: ", row[0])
+    print("Age: ", row[1])
+    print("Age: ", row[1])
+    print("Age: ", row[1])
+    print("Age: ", row[1])
+    print("Age: ", row[1])
 
 #function to add new account and details
-def OptionAddDetails():
+def OptionAddAccount():
     print("Let's Enter Your Details:")
     Name = input("Please Enter Your Name: ")
     Age = int(input("Please Enter Your Age: "))
@@ -60,7 +69,7 @@ def OptionAddDetails():
     ConfirmPassword = input("Re-Enter Your Password: ")
     if (Password != ConfirmPassword):
         print("Password does not match please Re-Enter details")
-        OptionAddDetails()
+        OptionAddAccount()
     else:
         Balance = int(input("Enter your Balance: "))
         AccountNumber = RandomAccountNumberGenerator()
@@ -68,6 +77,31 @@ def OptionAddDetails():
         cursor.execute("INSERT INTO Bank_Details values (%s, %s, %s, %s, %s, %s, %s)", (Name, Age, Email, Number, Password, Balance, AccountNumber))
         conn.commit()
         print("Your Account has been added!")
+
+#function to remove account and details
+def OptionDeleteAccount():
+    AccountToDelete = int(input("Enter Your Account Number To Delete: "))
+    cursor.execute("SELECT Number FROM Bank_Details WHERE AccountNumber = %s", (AccountToDelete,))
+    AccountNumber = cursor.fetchone()
+    if (AccountNumber != None):
+        NumberCheck = input("Please Enter Phone Number: ")
+        if (AccountNumber[0] == NumberCheck):
+            cursor.execute("SELECT Password FROM Bank_Details WHERE AccountNumber = %s", (AccountToDelete,))
+            AccountPassword = cursor.fetchone()
+            PasswordCheck = input("Enter Your Password To Verify: ")
+            if (AccountPassword[0] == PasswordCheck):
+                cursor.execute("DELETE FROM Bank_Details WHERE AccountNumber = '%s'", (AccountToDelete,))
+                conn.commit()
+                print("Your Account Will Be Deleted Soon")
+                print("====================================================================================================/n")
+            else:
+                print("Account Password Is Incorrect Please Re-Enter")
+                OptionChoose()
+        else:
+            print("Account Phone Number Is Incorrect Please Re-Enter")
+            OptionChoose()
+    else:
+        print("Account Does Not Exist")
 
 checkadminpassword = int(input("Enter Admin Password: "))
 if (adminpassword == checkadminpassword):
