@@ -6,7 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/100DaysOfPython/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/100DaysOfPython/PyCharmMiscProject/.venv" />
     </content>
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="Python 3.13 (MyPythonPrograms)" jdkType="Python SDK" />
+=======
     <orderEntry type="jdk" jdkName="Python 3.14 (MyPythonPrograms) (2)" jdkType="Python SDK" />
+>>>>>>> 684e18a640beee2897605993fac24e6eec5677ce
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
