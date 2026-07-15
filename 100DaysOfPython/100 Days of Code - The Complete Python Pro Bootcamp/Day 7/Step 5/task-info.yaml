@@ -16,5 +16,9 @@ files:
     visible: true
     learner_created: false
 status: Solved
+<<<<<<< HEAD
+record: 10
+=======
 record: -1
+>>>>>>> 59cf4cdf6230db7b7a66cb0b670acef3841a838f
 post_submission_on_open: true
