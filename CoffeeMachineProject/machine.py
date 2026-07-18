@@ -2,13 +2,14 @@ from resources import RESOURCES as rcs
 from resources import MENU as menu
 import elements as el
 
+sectionWidth = 50
 count = 0 #variable for count only
 totalNumberOfItems = [] #list of number eg if 5 items ["1","2","3","4","5"]
 machineMoney = 0 #total money recieved 
 resourceSufficient = [] #adds false when an ingredient is insufficient 
 resourcesList = rcs.keys() #adds total resources name as list
 el.coffeeIcon()
-el.section()
+el.section(sectionWidth)
 el.welcomeBanner()
 
 for coffee in menu: #prints the available options
@@ -18,7 +19,7 @@ for coffee in menu: #prints the available options
     #print(f"{count}. {coffee.title()} - ${menu[coffee]["cost"]}")
 count = 0 #reset count after use
 while True:
-    el.section()
+    el.section(sectionWidth)
     customerChoice = input("What would you like to have?:") #enter customer choice
     resourceSufficient = []
 
@@ -41,17 +42,18 @@ while True:
                     for resources in menu[coffeeList[customerChoiceInt]]["ingredients"]: #gets all ingridients from selected option from menu and divides it from total resources
                         rcs[resources] = rcs[resources] - menu[coffeeList[customerChoiceInt]]["ingredients"][resources] #divide      
                     machineMoney += menu[coffeeList[customerChoiceInt]]["cost"]
-                    el.section()
+                    el.section(sectionWidth)
                     el.thankYouBanner()
                 else:
                     print("Transaction has been cancelled! Please press P next time")
                 break
         else:
+            el.sorryBanner()
             print("Insufficient resources please choose other item or comeback again.")
             
 
     elif customerChoice == "report":
-        el.section()
+        el.section(sectionWidth)
         print("Resources left:\n")
         for resources in rcs:
             count += 1
@@ -62,7 +64,8 @@ while True:
         print("Please enter valid option")
     
     elif customerChoice == "exit":
-        el.section()
+        el.section(sectionWidth)
+        el.exiting()
         print("Exiting...")
         break
     
