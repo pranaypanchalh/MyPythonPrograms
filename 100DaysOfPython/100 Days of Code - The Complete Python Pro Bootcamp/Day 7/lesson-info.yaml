@@ -5,4 +5,8 @@ content:
   - Step 3
   - Step 4
   - Step 5
+<<<<<<< HEAD
 current_task: 4
+=======
+current_task: 3
+>>>>>>> b03b2343395404f8d8222ecb04ff86c1240f1b5e
