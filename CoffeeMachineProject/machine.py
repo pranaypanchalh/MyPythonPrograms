@@ -36,7 +36,7 @@ while True:
         if False not in resourceSufficient:
             while True:
                 el.paymentBanner()
-                payConfirmation = input(F"Your {coffeeList[customerChoiceInt].title()} is here! press P to pay ${menu[coffeeList[customerChoiceInt]]["cost"]}:").upper() #input for payment confirmation
+                payConfirmation = input(f"Your {coffeeList[customerChoiceInt].title()} is here! press P to pay ${menu[coffeeList[customerChoiceInt]]["cost"]}:").upper() #input for payment confirmation
 
                 if payConfirmation == "P": #check state
                     for resources in menu[coffeeList[customerChoiceInt]]["ingredients"]: #gets all ingridients from selected option from menu and divides it from total resources
@@ -55,6 +55,7 @@ while True:
     elif customerChoice == "report":
         el.section(sectionWidth)
         print("Resources left:\n")
+        count = 0
         for resources in rcs:
             count += 1
             print(f"{count}. {resources} : {rcs[resources]}")
@@ -67,7 +68,4 @@ while True:
         el.section(sectionWidth)
         el.exiting()
         print("Exiting...")
-        break
-    
-    else:
         break
