@@ -2,7 +2,7 @@ from resources import RESOURCES as rcs
 from resources import MENU as menu
 import elements as el
 
-sectionWidth = 50
+sectionWidth = 50 #width of the sections
 count = 0 #variable for count only
 totalNumberOfItems = [] #list of number eg if 5 items ["1","2","3","4","5"]
 machineMoney = 0 #total money recieved 
