@@ -18,5 +18,15 @@ while True:
 
     elif optionChoose == "login":
             Customer = BankCustomer(*op.login())
+            break
     else:
          print("Exiting")
+         break
+
+while True:
+    print("""
+    Choose your operation:
+    1. 
+    """)
+    optionChoose = input("Please choose your option: ").lower()
+    
