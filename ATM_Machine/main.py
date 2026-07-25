@@ -9,4 +9,14 @@ class BankCustomer:
         self.Password = Password
         self.Balance = Balance
         self.AccountNumber = AccountNumber
-print(op.login(1001,"Pranay@123"))
+
+
+while True:
+    optionChoose = input("Login or Register: ").lower()
+    if optionChoose == "register":
+        op.register(*op.getUserCredentialsForRegister())
+
+    elif optionChoose == "login":
+            Customer = BankCustomer(*op.login())
+    else:
+         print("Exiting")

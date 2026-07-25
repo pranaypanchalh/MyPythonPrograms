@@ -32,15 +32,46 @@ def fetchData():
     return customerAccounts
     
 
-def login(accountNumber, password):
-    rows = fetchData()
-    for row in rows:
-        if row[6] == accountNumber:
-            if row[4] == password:
-                return "True"
+def login():
+    loopStatus = 0
+    while loopStatus == 0:
+        inputAccountNumber = int(input("Please enter your account number: "))
+        inputPassword = input("Please enter your password: ")
+        rows = fetchData()
+        if inputAccountNumber in rows.keys():
+            if inputPassword in rows[inputAccountNumber]["Password"]:
+                print("Logged in success fully")
+                loopStatus = 1
+                return list(rows[inputAccountNumber].values())
             else:
-                return "Wrong pin"
-        elif accountNumber not in row:
-            print
+                print("Wrong Password, please try again")
+        else:
+            print("Account does not exist")
+        
+def getUserCredentialsForRegister():
+    loopStatus = 0
+    inputName = input("Please enter your name: ")
+    inputAge = int(input("Please enter your age: "))
+    inputEmail = input("Please enter your email: ")
+    inputNumber = int(input("Please enter your phone number: "))
+    while loopStatus == 0:
+        inputPassword = input("Create new password: ")
+        inputConfirmPassword = input("Confirm new password: ")
+        if inputPassword == inputConfirmPassword:
+            return inputName, inputAge, inputEmail, inputNumber, inputPassword
+            loopStatus = 1
+        else:
+            print("Password did not match")
+
+def register(name, age, email, number, password):
+    rows = fetchData()
+    tempRow = []
+    for row in rows:
+        tempRow.append(row)
+    newestAccountNumber = max(tempRow)
+    newestAccountNumber += 1
+    cursor.execute("insert into Bank_Details values (%s,%s,%s,%s,%s,%s,%s)", (name, age, email, number, password, 0, newestAccountNumber))
+    connection.commit()
+    print(f"Your account number is: {newestAccountNumber}")
 connection = connectDatabase()
 cursor = connection.cursor()
